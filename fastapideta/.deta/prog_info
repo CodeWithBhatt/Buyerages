@@ -1,0 +1,1 @@
+{"id":"80404e59-e0c7-4064-a94a-a59f19d89b8d","space":49171,"runtime":"python3.9","name":"fastapideta","path":"rwgf8d","project":"d0xdg8f2","account":"144798365827","region":"ap-south-1","deps":["fastapi","uvicorn","jinja2","sqlalchemy","PyMySQL","passlib","bcrypt","python-jose","python-multipart"],"envs":null,"public":true,"log_level":"off","cron":""}

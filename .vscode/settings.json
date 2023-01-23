@@ -1,0 +1,26 @@
+{
+    "cSpell.words": [
+        "autoflush",
+        "bookingdate",
+        "Buyerages",
+        "buyproperty",
+        "BUYRECORD",
+        "currentuser",
+        "downpayment",
+        "Farman",
+        "fastapi",
+        "Jayapradha",
+        "ondelete",
+        "passlib",
+        "pincode",
+        "propertydata",
+        "purchasedate",
+        "pydantic",
+        "pymysql",
+        "rentproperty",
+        "RENTRECORD",
+        "sessionmaker",
+        "sqlalchemy",
+        "templating"
+    ]
+}

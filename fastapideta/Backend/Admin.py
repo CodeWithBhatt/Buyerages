@@ -24,12 +24,16 @@ def Verify_Record(type:str, id: int, db:Session):
         db.commit()
         query1 = db.query(model.BuyRecord).filter(model.BuyRecord.record_id == id).first()
         query2 = db.query(model.Property).filter(model.Property.number == query1.property)
-        query2.update({model.Property.owner : query.customer})
+        query2.update({model.Property.owner : query.customer, model.Property.status : False})
         db.commit()
         return {"status": "success", "data":"buy record updated"}
     if type=='rent':
         query = db.query(model.RentRecord).filter(model.RentRecord.record_id == id)
         query.update({model.RentRecord.verification : True})
+        db.commit()
+        query1 = db.query(model.BuyRecord).filter(model.BuyRecord.record_id == id).first()
+        query2 = db.query(model.Property).filter(model.Property.number == query1.property)
+        query2.update({model.Property.status : False})
         db.commit()
         return {"status": "success", "data":"rent record updated"}
     else:

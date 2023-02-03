@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROPERTIES</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        .main-container {
+            height: 90vh;
+
+        }
+    </style>
+</head>
+
+<body>
+    {% if (data.BuyProperty)|length > 0 %}
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">Property to Buy</h1>
+    {% for p in (data.BuyProperty) %}
+    <section class="text-gray-600 body-font">
+        <script>
+            function Verify() {
+                const id = "{{ p.number }}";
+                fetch(`/admin/property?number=${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "accept": "application/json"
+                    }
+                })
+                    .then(response => {
+                        response.json()
+                        window.location.href = `/admin/property`;
+                    })
+                    .catch(error => {
+                        alert("Cannot Update Due to Some Internal Server Error");
+                    });
+            };
+        </script>
+        <div class="flex justify-center items-center main-container  bg-indigo-400">
+            <div class="w-3/4 p-5 rounded bg-white">
+                <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg"
+                    class="rounded-full w-32 justify-center items-center">
+                <h1 class="text-grey-300 text-sm p-1">Property Name: <span class="text font-bold">{{ p.name }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Number: <span class="text font-bold">{{ p.number }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Description: <span class="text font-bold">{{ p.description }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Location: <span class="text font-bold">{{ p.location }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Pincode: <span class="text font-bold">{{ p.pincode }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Price: <span class="text font-bold">{{ p.price }}</span></h1>
+                    {% if p.status == true %}
+                    <h1 class="text-xs text-green-600">Property Status:<span class="text font-bold"> Active </span></h1>
+                    {% else %}
+                    <h1 class="text-xs text-red-600">Property Status:<span class="text font-bold"> Inactive </span></h1>
+                    {% endif %}
+                
+                <button class="text-xs text-blue-700 border-3 py-2 px-3 rounded w-25 mt-2 hover:bg-blue-800 hover:text-white text-bold" onclick="Verify()">Verify</button>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    {% endif %}
+
+{% if (data.RentProperty)|length > 0 %}
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">Property to Rent</h1>
+    {% for p in (data.RentProperty) %}
+    <section class="text-gray-600 body-font">
+        <script>
+            function Verify() {
+                const id = "{{ p.number }}";
+                fetch(`/admin/property?number=${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "accept": "application/json"
+                    }
+                })
+                    .then(response => {
+                        response.json()
+                        window.location.href = `/admin/property`;
+                    })
+                    .catch(error => {
+                        alert("Cannot Update Due to Some Internal Server Error");
+                    });
+            };
+        </script>
+        <div class="flex justify-center items-center main-container  bg-indigo-400">
+            <div class="w-3/4 p-5 rounded bg-white">
+                <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg"
+                    class="rounded-full w-32 justify-center items-center">
+                <h1 class="text-grey-300 text-sm p-1">Property Name: <span class="text font-bold">{{ p.name }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Number: <span class="text font-bold">{{ p.number }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Description: <span class="text font-bold">{{ p.description }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Location: <span class="text font-bold">{{ p.location }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Pincode: <span class="text font-bold">{{ p.pincode }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Per Month Rent: <span class="text font-bold">{{ p.rent }}</span></h1>
+                    {% if p.status == true %}
+                    <h1 class="text-xs text-green-600">Property Status:<span class="text font-bold"> Active </span></h1>
+                    {% else %}
+                    <h1 class="text-xs text-red-600">Property Status:<span class="text font-bold"> Active </span></h1>
+                    {% endif %}
+                <button class="text-xs text-blue-700 border-3 py-2 px-3 rounded w-25 mt-2 hover:bg-blue-800 hover:text-white text-bold" onclick="Verify()">Verify</button>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>

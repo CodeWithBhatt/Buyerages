@@ -134,7 +134,7 @@ class RentProperty(BaseModel):
     class Config():
         orm_mode = True
 
-class BuyProperty(BaseModel):
+class BuyPropertyRecord(BaseModel):
     id : int
     property : int
     owner : str
@@ -148,7 +148,7 @@ class BuyProperty(BaseModel):
     class Config():
         orm_mode = True
 
-class RentProperty(BaseModel):
+class RentPropertyRecord(BaseModel):
     id : int
     property : int
     owner : str

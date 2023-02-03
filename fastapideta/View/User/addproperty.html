@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD PROPTERY</title>
+</head>
+<style>
+    .navigation {
+        font-family: 'Microsoft YaHei Light';
+        font-size: 15px;
+        display: flex;
+    }
+
+    .navigation li a:hover {
+        background-color: rgba(206, 216, 206, 0.74);
+        border-radius: 2px;
+        font-size: 15px;
+        color: rgb(55, 59, 61);
+        transform: scale(1.1);
+    }
+
+    li {
+        list-style: none;
+        padding: 20px 23px;
+    }
+
+    section {
+        font-family: 'Microsoft YaHei Light';
+        margin: 3px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 50px;
+    }
+
+    .navbar li a {
+        color: aliceblue;
+        text-decoration: none;
+        font-family: 'Microsoft YaHei Light';
+    }
+</style>
+
+<body>
+    <style>
+        body {
+            background-color: rgb(32, 49, 43);
+            height: 400px;
+            width: 60%;
+        }
+
+        .details {
+            background-color: rgb(26, 36, 28);
+            height: 800px;
+            width: 30%;
+            position: absolute;
+            padding: 0px 0px;
+            border-radius: 10px;
+            margin: 77px 47px 52px 549px;
+
+        }
+
+        .details h1 {
+            color: aliceblue;
+            position: relative;
+            /* left: 5px; */
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .details div p {
+            padding: 0px 0px;
+            color: rgb(251, 251, 252);
+            font-size: 15px;
+            position: relative;
+            right: 0px;
+            inline-size: 300px;
+            height: 30px;
+            justify-content: end;
+            padding: 0px 0px;
+            margin: 21px -30px -6px -3px;
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .input input {
+            text-align: top;
+            justify-content: start;
+            display: flex;
+            inline-size: 393px;
+            height: 37px;
+            width: 350px;
+            border-radius: 0px;
+            background-color: rgb(21, 27, 16);
+            font-family: 'Microsoft YaHei Light';
+            color: white;
+            font-size: 14px;
+            border-radius: 10px;
+
+        }
+
+        .button {
+            margin: 48px 10px 10px 0px;
+            height: 37px;
+            width: 114px;
+            font-size: 20px;
+            background-color: rgb(57, 65, 51);
+            border-color: white;
+            border-radius: 12px;
+        }
+
+        .inner_input input {
+            display: inline-block;
+            padding: 3px;
+            inline-size: 393px;
+            height: 37px;
+            width: 350px;
+            border-radius: 10px;
+            font-family: 'Microsoft YaHei Light';
+            /* padding: 0px 90px 0px 0px; */
+            background-color: rgb(21, 27, 16);
+
+        }
+
+        .biggerbox textarea {
+            display: flex;
+            padding: 3px;
+            inline-size: 393px;
+            height: 133px;
+            width: 350px;
+            text-align: start;
+            border-radius: 0px;
+            /* padding: 0px 90px 0px 0px; */
+            background-color: rgb(21, 27, 16);
+            color: aliceblue;
+            font-size: 15px;
+            border-radius: 10px;
+            font-family: 'Microsoft YaHei Light';
+        }
+
+        .container {
+            float: left;
+            margin: 0px;
+        }
+
+        .right {
+            float: left;
+            margin: 7px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+    <nav class="navbar">
+        <ul class="navigation">
+            <li class="item" id="homeservice"><a href="/service"> SERVICES</a></li>
+        </ul>
+    </nav>
+    <section class="details">
+        <h1>Add Property</h1>
+        <div class="input">
+            <p>*Property Number</p>
+            <input type="text" placeholder="Enter your Property_number" id="number">
+            <p>*Property Name</p>
+            <input type="text" placeholder="Enter your Property_name" id="name">
+            <p>*Description</p>
+            <div class="biggerbox">
+                <textarea name="myText" cols="30" rows="20" placeholder="Enter the description"
+                    id="description"></textarea>
+            </div>
+            <p>*Property Location</p>
+            <input type="text" placeholder="Enter your Property_location" id="location">
+            <div class="inner_input">
+                <p>*Property Pincode</p>
+                <input type="email" placeholder="Enter Property_pincode" id="pincode">
+            </div>
+            <p>*Property Type</p>
+            <div style="display: flex; align-items: center;">
+                <input type="checkbox" value="sell" name='type' id='sell' />
+                <label for="sell" style="color: #fff; ">SELL</label>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <input type="checkbox" value="rent" name='type' id='rent' />
+                <label for="rent" style="color: #fff; ">RENT</label>
+            </div>
+
+            <p>*Property Price</p>
+            <input type="number" placeholder="To sell enter proterty price" id="price"><br>
+            <p>*Property Per Month Rent</p>
+            <input type="number" placeholder="To rent enter per month rent" id="rentval"><br>
+            <button class="button" onclick="submit()">SUBMIT</button>
+        </div>
+    </section>
+</body>
+<script>
+    let sellCheckButton = document.getElementById("male");
+    let rentCheckButton = document.getElementById("female");
+
+
+    let sell = false;
+    let rent = false;
+    document.getElementById("sell").addEventListener("click", function () {
+        sell = !sell;
+      });
+      
+      document.getElementById("rent").addEventListener("click", function () {
+        rent = !rent;
+      });
+
+    function submit() {
+        const name = document.getElementById("name").value;
+        const number = document.getElementById("number").value;
+        const description = document.getElementById("description").value;
+        const location = document.getElementById("location").value;
+        const pincode = document.getElementById("pincode").value;
+        let price = 0;
+        let rentval = 0;
+        if (sell === false && rent===false){
+            alert("Select atleast any one property type");
+            return;
+        }
+        
+        if (sell===true){
+            price = parseInt(document.getElementById("price").value);
+        }
+        if (rent===true){
+            rentval = parseInt(document.getElementById("rentval").value);
+        }
+        
+        if (!name || !number || !description || !location || !pincode || (price === 0 && rentval === 0)) {
+            alert("All fields are required!");
+            return;
+        }
+
+        const data = {
+            number:number,
+            name:name,
+            description:description,
+            location:location,
+            pincode:pincode,
+            for_sell:sell,
+            for_rent:rent,
+            price:price,
+            rent:rentval
+        };
+        fetch("/sell/addproperty", {
+            method: "POST",
+            headers: {
+                "accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        }).then((res) => res.json())
+            .then((data) => {
+                if (data === null) {
+                    alert("Data already registered");
+                } else {
+                    alert("Successfully registered!");
+                }
+                window.location.href = '/sell/property';
+            })
+            .catch((err) => {
+                alert("An error occurred. Please try again later.");
+            });
+    }
+
+</script>
+
+</html>

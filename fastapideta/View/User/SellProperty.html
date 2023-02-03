@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Profile</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        .main-container {
+            height: 130vh;
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <img class="logo" src="https://thumbs2.imgbox.com/0e/6e/YKyr64C9_t.png" alt="no logo" />
+        </div>
+    </header>
+    <section class="text-black-600 body-font">
+        <div class="flex justify-center items-center main-container  bg-grey-400">
+            <div class="w-3/4 p-5 rounded bg-white">
+                <img src="https://i.pinimg.com/564x/d0/83/60/d08360d3844f626b989e5ea03f57842d.jpg"
+                    class="rounded-full w-32 justify-center items-center">
+                <h1 class="text-grey-900 font-semibold text-xl mt-5">{{ data.name }}</h1>
+                <h1 class="text-grey-300 text-sm p-1">Owner USN: <span class="text font-bold">{{ data.usn }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Owner Email: <span class="text font-bold">{{ data.email }}</span>
+                </h1>
+                <h1 class="text-grey-300 text-sm p-1">Owner Phone: <span class="text font-bold">{{ data.phone }}</span>
+                </h1>
+                {% if (data.property)|length > 0 %}
+                <div>
+                    <h1 class="text-grey-600 font-semibold text-l mt-5">Owner Properties</h1>
+                    {% for p in (data.property) %}
+                    <h1 class="text-xs text-gray-500">Property Name: <span class="text font-bold">{{ p.name }}</span>
+                    </h1>
+                    <h1 class="text-xs text-gray-500">Property Number: <span class="text font-bold">{{ p.number
+                            }}</span></h1>
+                    <h1 class="text-xs text-gray-500">Property Description: <span class="text font-bold">{{
+                            p.description }}</span></h1>
+                    <h1 class="text-xs text-gray-500">Property location: <span class="text font-bold">{{ p.location
+                            }}</span></h1>
+                    <h1 class="text-xs text-gray-500">Property Pincode: <span class="text font-bold">{{ p.pincode
+                            }}</span></h1>
+                    {% if p.for_sell == true %}
+                    <h1 class="text-xs text-gray-500"> Property Type: <span class="text font-bold">Sell</span> </h1>
+                    <h1 class="text-xs text-gray-500"> Property Price: <span class="text font-bold">{{ p.price }}</span>
+                    </h1>
+                    {% endif %}
+                    {% if p.for_rent == true %}
+                    <h1 class="text-xs text-gray-500"> Property Type: <span class="text font-bold">Rent</span> </h1>
+                    <h1 class="text-xs text-gray-500">Property Per Month Rent: <span class="text font-bold">{{ p.rent
+                            }}</span> </h1>
+                    {% endif %}
+
+                    {% if p.status == true %}
+                    <h1 class="text-xs text-green-600">Property Status:<span class="text font-bold"> Active </span></h1>
+                    {% else %}
+                    <h1 class="text-xs text-red-600">Property Status:<span class="text font-bold"> Active </span></h1>
+                    {% endif %}
+
+                    <button
+                        class="text-xs text-red-500 border-2 py-1 px-2 rounded w-25 mt-2 hover:bg-red-500 hover:text-white text-bold"
+                        onclick="Delete()">DELETE</button>
+                    <br>
+                    <script>
+                        function Delete() {
+                            const id = "{{ p.number }}";
+                            fetch(`/sell/property?property_number=${id}`, {
+                                method: "DELETE",
+                                headers: {
+                                    "accept": "application/json"
+                                }
+                            })
+                                .then(response => {
+                                    response.json()
+                                    window.location.href = `/sell/property`;
+                                })
+                                .catch(error => {
+                                    alert("Cannot Delete Due to Some Internal Server Error");
+                                });
+                        };
+                    </script>
+                    <br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div>
+                    <button
+                        class="text-xs text-green-500 border-2 py-1 px-2 rounded w-25 mt-2 hover:bg-green-500 hover:text-white text-bold"><a
+                            href="/sell/addproperty">ADD PROPERTY</a></button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+
+</html>

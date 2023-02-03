@@ -17,9 +17,13 @@ async def redirect_to_property(current_user:Schema.UserData = Depends(Auth.get_c
 def property(request:Request, current_user:Schema.UserData=Depends(Auth.get_current_user), db:Session=Depends(db)):
     all_property = Sell.Get_Property(current_user.username, db)
     # return all_property # remove response_class from decorator
-    return templates.TemplateResponse("SellProperty.html", {"request":request, "data":all_property})
+    return templates.TemplateResponse("sellproperty.html", {"request":request, "data":all_property})
 
-@router.post("/property", status_code=status.HTTP_201_CREATED)
+@router.get("/addproperty", response_class=HTMLResponse, response_model=Schema.Owner, status_code=status.HTTP_200_OK)
+def property(request:Request, current_user:Schema.UserData=Depends(Auth.get_current_user), db:Session=Depends(db)):
+    return templates.TemplateResponse("addproperty.html", {"request":request})
+
+@router.post("/addproperty", status_code=status.HTTP_201_CREATED)
 def add_property(request:Schema.AddProperty, current_user:Schema.UserData=Depends(Auth.get_current_user), db:Session=Depends(db)):
     new_property = Sell.AddProperty(request, current_user.username, db)
     if not new_property:

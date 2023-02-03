@@ -40,7 +40,7 @@ def All_Record(request:Request, current_user:Schema.UserData = Depends(Auth.get_
         record = Admin.All_Record(db)
         result = {"BuyRecord":record[0], "RentRecord":record[1]}
         # return {"data":result} # remove response_class from decorator
-        return templates.TemplateResponse("record.html", {"request":Request, "data":result})
+        return templates.TemplateResponse("record.html", {"request":request, "data":result})
     else:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Only Admin can access this")
 

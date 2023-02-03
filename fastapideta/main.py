@@ -1,8 +1,10 @@
-from fastapi import FastAPI, Request, status
+from fastapi import Depends, FastAPI, Request, status
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from Database import model, database as db
 from Routes import admin, sell, buy, rent, authorize as auth
+from Backend import Schema
+from sqlalchemy.orm import Session
 
 model.db.Base.metadata.create_all(db.engine)
 template = Jinja2Templates(directory='View')
@@ -23,12 +25,6 @@ app = FastAPI(
             "USN"  : "1HK20CS046",
             "Mail" : "1hk20cs046@hkbk.edu.in",
             "Role" : "Frontend Engineer"
-        },
-        "Developer 2": {
-            "Name" : "Anurag Bhatt",
-            "USN"  : "1HK20CS028",
-            "Mail" : "1hk20cs028@hkbk.edu.in",
-            "Role" : "Web Administrator"
         }
     }
 )
@@ -51,6 +47,14 @@ async def home(data:Request):
 async def about(data:Request):
     return template.TemplateResponse("about.html", {"request":data})
 
-@app.get('/contact', response_class=HTMLResponse, status_code=status.HTTP_200_OK, tags=['Home'])
-async def contact(data:Request):
-    return template.TemplateResponse("contact.html", {"request":data})
+@app.get('/service', response_class=HTMLResponse, status_code=status.HTTP_200_OK, tags=['Home'])
+async def service(data:Request):
+    return template.TemplateResponse("service.html", {"request":data})
+
+@app.post('/submit-contact')
+def submit(request:Schema.contact, db:Session = Depends(db.get_db)):
+    detail = model.Contact(name=request.name, address=request.address, email=request.email, number=request.number, subject=request.subject, desc=request.desc)
+    db.add(detail)
+    db.commit()
+    db.refresh(detail)
+    return detail

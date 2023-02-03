@@ -1,16 +1,52 @@
-from fastapi import HTTPException, status, Depends
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import HTTPException, status, Depends, Request
+from fastapi.security import OAuth2, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
+from fastapi.security.utils import get_authorization_scheme_param
+from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from sqlalchemy.orm import Session
 from . import Schema
 from Database import model
 from jose import jwt
 from operator import or_
+from typing import Optional, Dict
+
+class OAuth2PasswordBearerWithCookie(OAuth2):
+    def __init__(
+        self,
+        tokenUrl: str,
+        scheme_name: Optional[str] = None,
+        scopes: Optional[Dict[str, str]] = None,
+        description: Optional[str] = None,
+        auto_error: bool = True,
+    ):
+        if not scopes:
+            scopes = {}
+        flows = OAuthFlowsModel(password={"tokenUrl": tokenUrl, "scopes": scopes})
+        super().__init__(
+            flows=flows,
+            scheme_name=scheme_name,
+            description=description,
+            auto_error=auto_error,
+        )
+
+    async def __call__(self, request: Request) -> Optional[str]:
+        authorization: str = request.cookies.get("access_token")
+        scheme, param = get_authorization_scheme_param(authorization)
+        if not authorization:
+            if self.auto_error:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Not authenticated",
+                    headers={"WWW-Authenticate": "Bearer"},
+                )
+            else:
+                return None
+        return authorization
 
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated="auto")
 SECRET_KEY = "25b2e8d86893b06c86bc5a66bfb93ef1ff0de475bb49c7e38280b4d18dd1625a"
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="/token")
 ALGORITHM = "HS256"
 
 
@@ -59,7 +95,7 @@ def Login(data:OAuth2PasswordRequestForm, db:Session):
     else:
         if verify_password(data.password, user.password):
             access_token = create_access_token({"username":user.usn, "password":data.password}, user.role)
-            return Schema.Token(access_token=access_token, token_type='bearer')
+            return Schema.Token(access_token=access_token, token_type='bearer', user=user.role)
         else:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Invalid credential")
 

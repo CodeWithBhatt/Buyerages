@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="screen and (max-width= 1500)" href="">
+    <!-- <link rel="stylesheet" type="text/css" href="/fastapideta/View/CSS/home.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <title>BUYERAGES</title>
+    <style>
+        body {
+            background-color: black;
+            height: 2600px;
+        }
+
+        .logo {
+            position: center;
+            margin: 8px 0px 0px 1px;
+            margin-left: 20%;
+            top: 32px;
+            font-size: 20px;
+            color: chartreuse;
+            left: 30px;
+        }
+
+        img.logo {
+            border-radius: 25px;
+            height: 122px;
+        }
+
+        .nav {
+            display: flex;
+            display: inline-block;
+            box-sizing: border-box;
+            background-color: rgb(25, 28, 31);
+            width: 100%;
+            height: 60px;
+            margin-block: 0px;
+            position: absolute;
+            top: 130px;
+            left: 0px;
+
+        }
+
+        .nav ul {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav ul li {
+            position: relative;
+            font-family: 'Microsoft YaHei Light';
+            display: inline-block;
+            list-style: none;
+        }
+
+        .nav ul li a {
+            padding: 0 10px;
+            display: block;
+            line-height: 60px;
+            text-decoration: none;
+            font-size: 14px;
+
+        }
+
+        .nav li a {
+            display: inline-block;
+            color: rgb(250, 252, 247);
+            text-decoration: none;
+            font-size: 19px;
+
+        }
+
+        .nav li a:hover {
+            color: rgb(24, 221, 67);
+            border-radius: 4px;
+        }
+
+        .nav li {
+            display: inline-block;
+            padding: 0px 5px;
+        }
+
+        .loginwaa {
+            padding: 0px 0px 0px 1000px;
+        }
+
+        .rightdown {
+            color: aquamarine;
+            background-color: rgb(25, 28, 31);
+            width: 50%;
+            height: 610px;
+            display: inline-block;
+            text-justify: auto;
+            text-anchor: middle;
+            padding-right: 50px;
+            padding-left: 50px;
+            position: absolute;
+            left: 600px;
+            top: 170px;
+            font-family: 'Microsoft YaHei Light';
+        }
+
+        .leftdown {
+            color: aquamarine;
+            background-color: rgb(25, 28, 31);
+            width: 750px;
+            height: 585px;
+            display: inline-block;
+            position: absolute;
+            right: 675px;
+            top: 190px;
+        }
+
+        .leftdown img {
+            height: 585px;
+            width: 810px;
+        }
+
+        .OURservices {
+            display: block;
+            background-color: black;
+            width: 100%;
+            height: 500px;
+            margin: auto;
+            position: absolute;
+            top: 745px;
+            margin: 30px auto;
+            font-family: 'Microsoft YaHei Light';
+            font-size: 14PX;
+
+        }
+
+        .OURservices p:hover {
+            color: chartreuse;
+        }
+
+
+        .heading {
+            font-size: 60px;
+            text-align: center;
+            color: aliceblue;
+            font-family: 'Microsoft YaHei Light';
+            padding-bottom: 0px;
+        }
+
+        .ats {
+            font-size: 60px;
+            text-align: center;
+            color: aliceblue;
+            font-family: 'Microsoft YaHei Light';
+        }
+
+        .ex {
+            font-size: 20px;
+            text-align: center;
+            color: aliceblue;
+
+        }
+
+        .about {
+            font-size: 14px;
+            text-align: center;
+            color: aliceblue;
+
+        }
+
+        .OURservices {
+            font-size: 20px;
+            text-align: center;
+            color: aliceblue;
+            font-size: 30px;
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .property {
+            background-image: url();
+            background-color: rgb(2, 6, 10);
+            display: inline-block;
+            height: 400px;
+            width: 300px;
+            position: relative;
+            top: 200px;
+            right: 580px;
+        }
+
+        hr {
+            color: darkgrey;
+            position: absolute;
+            top: 1500px;
+            width: 100%;
+        }
+
+        .details {
+            background-color: rgb(13, 17, 20);
+            height: 800px;
+            width: 40%;
+            position: absolute;
+            top: 1573px;
+            right: 0px;
+            padding: 0px 0px;
+
+        }
+
+        .details h1 {
+            color: aliceblue;
+            position: relative;
+            left: 5px;
+        }
+
+        .details div p {
+            padding: 0px 0px;
+            color: rgb(251, 251, 252);
+            font-size: 20px;
+            position: relative;
+            right: 0px;
+            inline-size: 300px;
+            height: 30px;
+            justify-content: end;
+            padding: 0px 0px;
+            margin: 21px -30px -6px -3px;
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .input input {
+            text-align: left;
+            justify-content: left;
+            font-size: 15px;
+            justify-content: left;
+            display: flex;
+            inline-size: 393px;
+            height: 37px;
+            width: 600px;
+            border-radius: 0px;
+            background-color: rgb(21, 27, 16);
+            border-color: aliceblue;
+            color: white;
+            font-size: 14px;
+            font-family: 'Microsoft YaHei Light';
+
+
+        }
+
+        .button {
+            margin: 23px 10px 10px 0px;
+            height: 37px;
+            width: 114px;
+            font-size: 20px;
+            background-color: rgb(57, 65, 51);
+            border-color: white;
+            border-radius: 12pX;
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .inner_input input {
+            display: inline-block;
+            padding: 3px;
+            inline-size: 393px;
+            height: 37px;
+            width: 597px;
+            border-radius: 0px;
+            background-color: rgb(21, 27, 16);
+
+        }
+
+        .biggerbox textarea {
+            display: flex;
+            padding: 3px;
+            inline-size: 393px;
+            height: 133px;
+            width: 597px;
+            text-align: start;
+            border-radius: 0px;
+            background-color: rgb(21, 27, 16);
+            color: aliceblue;
+            font-size: 15px;
+            font-family: 'Microsoft YaHei Light';
+
+
+        }
+
+        .left_details {
+            background-color: rgb(13, 17, 20);
+            height: 800px;
+            width: 60%;
+            position: absolute;
+            top: 1550px;
+            left: 0px;
+            padding: 0px 0px;
+            z-index: -1;
+        }
+
+        .maindetails {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 1594px;
+            padding: 65px 20px;
+            margin: 10px 15px;
+        }
+
+        .adress {
+            width: 362px;
+            font-size: 18px;
+            margin: 0px 13px;
+            padding: 40px 0px 10px 190px;
+            text-align: center;
+            justify-content: center;
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .firstline {
+            font-size: 50px;
+            font-weight: 100;
+            padding: 0px 44px 44px 210px;
+            margin: 0px 0px 0px 0px;
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .number {
+            width: 362px;
+            font-size: 18px;
+            margin: 0px 13px;
+            padding: 40px 0px 10px 190px;
+            text-align: center;
+            justify-content: center;
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .logodown {
+            position: absolute;
+            top: 2350px;
+            left: 600px;
+            opacity: 4.4;
+
+
+        }
+
+        .mail {
+            color: chartreuse;
+            position: absolute;
+            top: 2490px;
+            left: 650px;
+            opacity: 0.7;
+            font-size: 22px;
+            font-family: 'Microsoft YaHei Light';
+
+        }
+
+        .y {
+            position: relative;
+
+
+
+        }
+
+        #mar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            top: 2400px;
+            align-items: center;
+            color: white;
+            height: 40px;
+            width: 100%;
+            font-family: 'Microsoft YaHei Light';
+        }
+
+        html,
+        body {
+            position: relative;
+            height: 700px;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 700px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: rgb(14, 10, 10);
+            height: 400px;
+        }
+
+        .swiper-slide img {
+            width: auto;
+            height: auto;
+            max-width: 457px;
+            max-height: 553px;
+            -ms-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+        .knowmore {
+            display: inline-block;
+            position: absolute;
+            top: 750px;
+            right: 300px;
+            z-index: 1;
+        }
+
+        .knowmore a {
+            text-decoration: none;
+            font-family: 'Microsoft YaHei Light';
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img class="logo" src="https://thumbs2.imgbox.com/0e/6e/YKyr64C9_t.png" alt="no logo" />
+        </div>
+    </header>
+    <div class="container">
+        <div class="nav">
+            <nav>
+                <ul>
+                    <li><a href="/"> Home</a></li>
+                    <li><a href="/about"> About</a></li>
+                    <ul>
+                        <li><a href="/service" target="_blank"> Services</a></li>
+                    </ul>
+                    <li class="loginwaa"><a href="/signin">Sign(UP/IN)</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="rightdown">
+            <p class="heading">
+                Buyerages</p>
+            <p class="ats">
+                AT YOUR SERVICE
+            </p>
+            <p class="ex">
+                Exceeding Expectations
+            </p>
+            <p class="about">Our Buyerages , is dedicated to providing top-quality service to our clients. We have a
+                team of highly trained
+                and experienced real estate professionals who are knowledgeable about the local market and are committed
+                to helping you achieve your real estate goals.We understand that buying or selling a home is a major
+                decision, and we strive to make the process as smooth and stress-free as possible. We are always
+                available
+                to answer questions and provide guidance throughout the process.</p>
+        </div>
+        <div class="leftdown">
+            <img src="https://rb.gy/pffw7u" alt="">
+        </div>
+        <div class="OURservices">
+            <p class="service">PROPERTIES</p>
+            <div class="property1">
+                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://thumbs2.imgbox.com/57/60/aWKGKLDd_t.jpeg" alt="image host" class="swiper-lazy"/>
+                            <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://thumbs2.imgbox.com/10/59/2nr0eyrf_t.jpeg" class="swiper-lazy" />
+                            <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://thumbs2.imgbox.com/18/aa/GWKMwEQP_t.jpeg" class="swiper-lazy" />
+                            <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg" class="swiper-lazy" />
+                            <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://thumbs2.imgbox.com/62/c4/brsXbPXa_t.jpeg" class="swiper-lazy" />
+                            <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://thumbs2.imgbox.com/98/1f/oqqmurYb_t.jpeg" class="swiper-lazy" />
+                            <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+                <script>
+                    var swiper = new Swiper(".mySwiper", {
+                        lazy: true,
+                        pagination: {
+                            el: ".swiper-pagination",
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        },
+                    });
+                </script>
+                <div class="knowmore">
+                    <button><a href="./signup.html">know more</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="photos">
+            <p>photos</p>
+        </div>
+        <hr>
+        <section class="details">
+            <h1>Enter your details:</h1>
+            <div class="input">
+                <p>*Name</p>
+                <input type="text" placeholder="Enter your name" id="name">
+                <p>*Address</p>
+                <input type="text" placeholder="Enter your address" id="address">
+                <div class="inner_input">
+                    <p>*Email</p>
+                    <input type="email" placeholder="Enter your Email" id="email">
+                    <p>*Contact Number</p>
+                    <input type="number" placeholder="Enter your Number" id="number">
+                </div>
+                <p>*Request</p>
+                <input type="text" placeholder="Enter your Subject" id="subject">
+                <p>*Description</p>
+                <div class="biggerbox">
+                    <textarea id="desc" name="myText" cols="300" rows="200" placeholder="Enter the description"></textarea>
+                </div>
+                <button class="button" onclick="submit()">SUBMIT</button>
+            </div>
+            <script>
+                function submit() {
+                    const Cn_Name = document.getElementById("name").value;
+                    const Address = document.getElementById("address").value;
+                    const Email= document.getElementById("email").value;
+                    const Number = document.getElementById("number").value;
+                    const Subject = document.getElementById("subject").value;
+                    const Desc = document.getElementById("desc").value;
+
+                    data = {
+                        name : Cn_Name,
+                        address : Address,
+                        email : Email,
+                        number : Number,
+                        subject : Subject,
+                        desc : Desc
+                    }
+                    fetch("/submit-contact", {
+                        method: "POST",
+                        headers: {
+                            "accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data),
+                    }).then((res) => res.json())
+                        .then((data) => {
+                            alert("Data received Successfully!\nWe will contact you soon");
+                        })
+                        .catch((err) => {
+                            console.error(err);
+                            alert("An error occurred. Please try again later.");
+                        });
+                }
+            </script>
+        </section>
+        <section class="left_details"></section>
+        <div class="maindetails">
+            <p class="firstline">GET IN TOUCH</p>
+            <p class="adress">No 25, 1st Cross Road, Raghavendra Colony, Chamarajpet, Bangalore, Karnataka, India</p>
+            <p class="number">Contact: +91 9449987882</p>
+        </div>
+        <div class="lastone">
+            <div class="logo">
+                <img class="logodown" src="https://thumbs2.imgbox.com/0e/6e/YKyr64C9_t.png" alt="no logo" />
+            </div>
+            <div class="mail">
+                <p>Buyerages@gmail.com</p>
+            </div>
+        </div>
+        <footer class="y">
+            <marquee id="mar">
+                Copyright 2022 @BUYERAGES
+            </marquee>
+        </footer>
+</body>
+
+</html>

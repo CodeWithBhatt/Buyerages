@@ -11,7 +11,7 @@ db = database.get_db
 
 @router.get("/", status_code=status.HTTP_200_OK)
 async def redirect_to_property(current_user:Schema.UserData = Depends(Auth.get_current_user), db : Session = Depends(db)):
-    return RedirectResponse("/property")
+    return RedirectResponse("/sell/property")
 
 @router.get("/property", response_class=HTMLResponse, response_model=Schema.Owner, status_code=status.HTTP_200_OK)
 def property(request:Request, current_user:Schema.UserData=Depends(Auth.get_current_user), db:Session=Depends(db)):

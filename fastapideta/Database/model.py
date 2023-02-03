@@ -59,3 +59,13 @@ class RentRecord(db.Base):
     USER = relationship("User", foreign_keys=[owner])
     USER1 = relationship("User", foreign_keys=[customer])
     PROPERTY = relationship("Property", overlaps="RENTRECORD")
+
+class Contact(db.Base):
+    __tablename__ = "contact"
+    contact_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(50))
+    address = Column(String(200))
+    email = Column(String(50))
+    number = Column(String(15))
+    subject = Column(String(100))
+    desc = Column(String(500))

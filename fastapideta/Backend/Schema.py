@@ -15,6 +15,7 @@ class Add_Account(BaseModel):
 class Token(BaseModel):
     access_token : str
     token_type : str
+    user : str
     class Config():
         orm_mode = True
 
@@ -157,5 +158,15 @@ class RentProperty(BaseModel):
     tenure : int
     booking : str
     verify : bool
+    class Config():
+        orm_mode = True
+
+class contact(BaseModel):
+    name : str
+    address : str
+    email : str
+    number : str
+    subject: str
+    desc : str
     class Config():
         orm_mode = True

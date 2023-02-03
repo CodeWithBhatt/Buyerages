@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css"
+        referrerpolicy="no-referrer"
+        integrity="sha512-y6ZMKFUQrn+UUEVoqYe8ApScqbjuhjqzTuwUMEGMDuhS2niI8KA3vhH2LenreqJXQS+iIXVTRL2iaNfJbDNA1Q=="
+        crossorigin="anonymous" />
+    <style>
+        .main-container {
+            height: 186vh;
+        }
+
+        input:focus-visible {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex justify-center items-center main-container bg-gradient-to-b from-purple-600 via bg-pink-200">
+        <div class="w-1/4 shadow-lg p-7 rounded bg-white">
+            <p class="font-bold text-2xl text-center mt-3 mb-8">SignIn</p>
+            <div class="mb-2">
+                <label for="name" class="font-bold mb-2 text-sm">Name</label> <br />
+                <input type="text" id="name" placeholder="Type you're name"
+                    class="border-b-2 pt-2 pb-2 pl-2 mb-2 w-full" />
+            </div>
+            <div class="mb-2">
+                <label for="username" class="font-bold mb-2 text-sm">USN</label> <br />
+                <input type="text" id="usn" placeholder="Type you're usn"
+                    class="border-b-2 pt-2 pb-2 pl-2 mb-2 w-full" />
+            </div>
+            <div class="mb-2">
+                <label for="username" class="font-bold mb-2 text-sm">Email</label> <br />
+                <input type="email" id="email" placeholder="Type you're email"
+                    class="border-b-2 pt-2 pb-2 pl-2 mb-2 w-full" />
+            </div>
+            <div id="Gender" class="text-sm mb-2">
+                <label class="font-bold mb-2 text-sm">Gender:</label> <br />
+                <input type="radio" name="choose" id="male" class="text-sm-mx-1"><label for="male">Male</label>
+                <input type="radio" name="choose" id="female" class="text-sm-mx-1"><label for="female">Female</label>
+            </div>
+            <div class="mb-2">
+                <label for="phone" class="font-bold mb-2 text-sm">Phone Number: </label> <br />
+                <input type="number" id="phone" placeholder="Type you're phone number"
+                    class="border-b-2 pt-2 pb-2 pl-2 mb-2 w-full" />
+            </div>
+            <div>
+                <label for="password" class="font-bold mb-2 text-sm">Password</label> <br />
+                <input type="password" placeholder="Type you're password" id="password"
+                    class="border-b-2 pt-2 pb-2 pl-2 mb-2 w-full" />
+            </div>
+            <div>
+                <label for="confirmpassword" class="font-bold mb-2 text-sm">Confirm Password</label> <br />
+                <input type="password" placeholder="Confirm you're password" id="cnfpassword"
+                    class="border-b-2 pt-2 pb-2 pl-2 mb-2 w-full" />
+            </div>
+            <button
+                class=" block bg-gradiant-to-r  from-purple-700 via bg-pink-200 text-white pt-3 pb-3 pl-6 pr-6 rounded w-full mt-2 hover:bg-purple-500"
+                onclick="register()">
+                SUBMIT </button>
+            <p class="text-center block mt-10">Already have an account!<a href="/signin"
+                    class="text-center block text-purple-900">LOGIN</a></p>
+        </div>
+    </div>
+    <script>
+        let maleRadioButton = document.getElementById("male");
+        let femaleRadioButton = document.getElementById("female");
+
+
+        let sex = "";
+        maleRadioButton.addEventListener("click", function () {
+            maleRadioButton.setAttribute("checked", "checked");
+            femaleRadioButton.removeAttribute("checked");
+            sex = "M";
+        });
+
+        femaleRadioButton.addEventListener("click", function () {
+            femaleRadioButton.setAttribute("checked", "checked");
+            maleRadioButton.removeAttribute("checked");
+            sex = "F";
+        });
+
+        function register() {
+            const nameInput = document.getElementById("name").value;
+            const usnInput = document.getElementById("usn").value;
+            const emailInput = document.getElementById("email").value;
+            const phoneInput = document.getElementById("phone").value;
+
+            const passwordInput = document.getElementById("password").value;
+            const confirmpasswordInput = document.getElementById("cnfpassword").value;
+
+
+            const name = nameInput;
+            const usn = usnInput;
+            const email = emailInput;
+            const phone = phoneInput;
+            const password = passwordInput;
+            const confirmpassword = confirmpasswordInput;
+
+            if (!name || !usn || !email || !phone || !password || !confirmpassword) {
+                alert("All fields are required!");
+                return;
+            }
+
+            if (password !== confirmpassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+            const data = {
+                name: name,
+                usn: usn,
+                email: email,
+                phone: phone,
+                password: password,
+                sex: sex
+            };
+            fetch("/signup", {
+                method: "POST",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data),
+            }).then((res) => res.json())
+                .then((data) => {
+                    if (data === null){
+                        alert("Data already registered");
+                        window.location.href = '/login';
+                    }else{
+                        alert("Successfully registered!");
+                        window.location.href = "/";}
+                })
+                .catch((err) => {
+                    alert("An error occurred. Please try again later.");
+                });
+        }
+
+    </script>
+</body>
+
+</html>

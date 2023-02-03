@@ -13,20 +13,6 @@ app = FastAPI(
     description="18CSL58 DBMS Laboratory Mini Project on Property Management",
     version="2.1.0",
     swagger_ui_oauth2_redirect_url='/login',
-    contact={
-        "Developer 1": {
-            "Name" : "Jayapradha B",
-            "USN"  : "1HK20CS059",
-            "Mail" : "1hk20cs059@hkbk.edu.in",
-            "Role" : "Backend Engineer"
-        },
-        "Developer 2": {
-            "Name" : "Farman Ali",
-            "USN"  : "1HK20CS046",
-            "Mail" : "1hk20cs046@hkbk.edu.in",
-            "Role" : "Frontend Engineer"
-        }
-    }
 )
 
 app.include_router(admin.router)

@@ -431,16 +431,65 @@
             <img class="logo" src="https://thumbs2.imgbox.com/0e/6e/YKyr64C9_t.png" alt="no logo" />
         </div>
     </header>
+    <script>
+        window.onload = function () {
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+            }
+
+
+            const user = getCookie("user");
+            const admin = document.getElementById("admin");
+            const accessToken = getCookie("access_token");
+            const loginButton = document.getElementById("log");
+
+            if (accessToken) {
+                loginButton.innerHTML = "SignOut";
+                loginButton.onclick = function () {
+                  function deleteCookie(name) {
+                    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+                    }
+                  deleteCookie("access_token");
+                  deleteCookie("user");
+                  admin.innerHTML = "";
+                  toggleLoginButton();
+                }
+              } else {
+                loginButton.innerHTML = "SignIN/SignUP";
+                loginButton.href = "/signin";
+              }
+
+            if (user === "admin") {
+                admin.innerHTML = "Admin";
+                admin.onclick = function () {
+                    const accessToken = localStorage.getItem("access_token");
+                    $.ajax({
+                        url: "/admin",
+                        type: "GET",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                        },
+                        success: function () {
+                            setTimeout(function () {
+                                window.location.href = '/admin';
+                            }, 333);
+                        }
+                    });
+                }
+            }
+        }
+    </script>
     <div class="container">
         <div class="nav">
             <nav>
                 <ul>
                     <li><a href="/"> Home</a></li>
                     <li><a href="/about"> About</a></li>
-                    <ul>
-                        <li><a href="/service" target="_blank"> Services</a></li>
-                    </ul>
-                    <li class="loginwaa"><a href="/signin">Sign(UP/IN)</a></li>
+                    <li><a href="/service" target="_blank"> Services</a></li>
+                    <li class="loginwaa"><a href="" id="log"></a></li>
+                    <li><a target="_blank" id="admin" href="/admin"></a></li>
                 </ul>
             </nav>
         </div>
@@ -470,7 +519,8 @@
                 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="https://thumbs2.imgbox.com/57/60/aWKGKLDd_t.jpeg" alt="image host" class="swiper-lazy"/>
+                            <img src="https://thumbs2.imgbox.com/57/60/aWKGKLDd_t.jpeg" alt="image host"
+                                class="swiper-lazy" />
                             <!-- <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div> -->
                         </div>
                         <div class="swiper-slide">
@@ -538,7 +588,8 @@
                 <input type="text" placeholder="Enter your Subject" id="subject">
                 <p>*Description</p>
                 <div class="biggerbox">
-                    <textarea id="desc" name="myText" cols="300" rows="200" placeholder="Enter the description"></textarea>
+                    <textarea id="desc" name="myText" cols="300" rows="200"
+                        placeholder="Enter the description"></textarea>
                 </div>
                 <button class="button" onclick="submit()">SUBMIT</button>
             </div>
@@ -546,18 +597,18 @@
                 function submit() {
                     const Cn_Name = document.getElementById("name").value;
                     const Address = document.getElementById("address").value;
-                    const Email= document.getElementById("email").value;
+                    const Email = document.getElementById("email").value;
                     const Number = document.getElementById("number").value;
                     const Subject = document.getElementById("subject").value;
                     const Desc = document.getElementById("desc").value;
 
                     data = {
-                        name : Cn_Name,
-                        address : Address,
-                        email : Email,
-                        number : Number,
-                        subject : Subject,
-                        desc : Desc
+                        name: Cn_Name,
+                        address: Address,
+                        email: Email,
+                        number: Number,
+                        subject: Subject,
+                        desc: Desc
                     }
                     fetch("/submit-contact", {
                         method: "POST",

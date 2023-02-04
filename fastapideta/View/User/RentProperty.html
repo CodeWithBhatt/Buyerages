@@ -16,6 +16,11 @@
     </style>
     <script>
         function Rent(num, owe, rnt) {
+            
+
+            const number = num;
+            const owner = owe;
+            const rent = parseInt(rnt);
             function tenure_func(rent, downpayment) {
                 alert(`Price of Property: ${rent}\nDownpayment (3 Months Rent): ${downpayment}`);
                 const opinion = confirm("Do you want to rent the property? Please do confirmation");
@@ -25,10 +30,6 @@
                     return null;
                 }
             }
-
-            const number = num;
-            const owner = owe;
-            const rent = parseInt(rnt);
             const downpayment = rent*3.0;
             const tenure = tenure_func(rent, downpayment);
 
@@ -81,7 +82,7 @@
                 <h1 class="text-grey-300 text-sm p-1">Property Rent Per Month: <span class="text font-bold">{{ p.rent }}</span></h1>
                 <button
                     class="text-xs text-green-500 border-2 py-1 px-2 rounded w-25 mt-2 hover:bg-green-500 hover:text-white text-bold"
-                    onclick="Rent('{{ p.number }}', '{{ p.owner }}', '{{ p.price }}')">REGISTER RENTING</button>
+                    onclick="Rent('{{ p.number }}', '{{ p.owner }}', '{{ p.rent }}')">REGISTER RENTING</button>
             </div>
             <br>
         </div>

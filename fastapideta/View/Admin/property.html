@@ -14,10 +14,23 @@
 
         }
     </style>
-
-   
-
-    
+    <script>
+        function Verify(number) {
+            fetch(`/admin/property?number=${number}`, {
+                method: "PUT",
+                headers: {
+                    "accept": "application/json"
+                }
+            })
+                .then(response => {
+                    response.json()
+                    window.location.href = `/admin/property`;
+                })
+                .catch(error => {
+                    alert("Cannot Update Due to Some Internal Server Error");
+                });
+        };
+    </script>
 </head>
 
 <body>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECORDS</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        .main-container {
+            height: 90vh;
+
+        }
+    </style>
+    <script>
+        function Verify(type,id) {
+            fetch(`/admin/record?type=${type}&id=${parseInt(id)}`, {
+                method: "PUT",
+                headers: {
+                    "accept": "application/json"
+                }
+            })
+                .then(response => {
+                    response.json()
+                    window.location.href = `/admin/record`;
+                })
+                .catch(error => {
+                    alert("Cannot Update Due to Some Internal Server Error");
+                });
+        };
+    </script>
+</head>
+
+<body>
+    {% if (data.BuyRecord)|length > 0 %}
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">Purchase Records</h1>
+    {% for r in (data.BuyRecord) %}
+    <section class="text-gray-600 body-font">
+        
+        <div class="flex justify-center items-center main-container  bg-indigo-400">
+            <div class="w-3/4 p-5 rounded bg-white">
+                <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg"
+                    class="rounded-full w-32 justify-center items-center">
+                <h1 class="text-grey-300 text-sm p-1">Property Number: <span class="text font-bold">{{ r.property }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Owner: <span class="text font-bold">{{ r.owner }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Buyer: <span class="text font-bold">{{ r.customer }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Price: <span class="text font-bold">{{ r.price }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Transaction Tax: <span class="text font-bold">{{ r.tax }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Total Price: <span class="text font-bold">{{ r.total }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Token Paid: <span class="text font-bold">{{ r.token }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Date of Registration: <span class="text font-bold">{{ r.purchase }}</span></h1>
+                    {% if r.verify == true %}
+                    <h1 class="text-xs text-green-600">Verification Status:<span class="text font-bold"> Active </span></h1>
+                    {% else %}
+                    <h1 class="text-xs text-red-600">Verification Status:<span class="text font-bold"> Inactive </span></h1>
+                    {% endif %}
+                
+                <button class="text-xs text-blue-700 border-3 py-2 px-3 rounded w-25 mt-2 hover:bg-blue-800 hover:text-white text-bold" onclick="Verify('buy', '{{ r.id }}')">Verify</button>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    {% endif %}
+
+{% if (data.RentRecord)|length > 0 %}
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">Rent Records</h1>
+    {% for r in (data.RentRecord) %}
+    <section class="text-gray-600 body-font">
+        
+        <div class="flex justify-center items-center main-container  bg-indigo-400">
+            <div class="w-3/4 p-5 rounded bg-white">
+                <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg"
+                    class="rounded-full w-32 justify-center items-center">
+                    <h1 class="text-grey-300 text-sm p-1">Property Number: <span class="text font-bold">{{ r.property }}</span></h1>
+                    <h1 class="text-grey-300 text-sm p-1">Property Owner: <span class="text font-bold">{{ r.owner }}</span></h1>
+                    <h1 class="text-grey-300 text-sm p-1">Renter: <span class="text font-bold">{{ r.customer }}</span></h1>
+                    <h1 class="text-grey-300 text-sm p-1">Property Rent: <span class="text font-bold">{{ r.rent }}</span></h1>
+                    <h1 class="text-grey-300 text-sm p-1">Downpayment: <span class="text font-bold">{{ r.downpayment }}</span></h1>
+                    <h1 class="text-grey-300 text-sm p-1">Tenure of Stay (in months): <span class="text font-bold">{{ r.tenure }}</span></h1>
+                    <h1 class="text-grey-300 text-sm p-1">Date of Booking: <span class="text font-bold">{{ r.booking }}</span></h1>
+                    {% if r.verify == true %}
+                    <h1 class="text-xs text-green-600">Verification Status:<span class="text font-bold"> Active </span></h1>
+                    {% else %}
+                    <h1 class="text-xs text-red-600">Verification Status:<span class="text font-bold"> Inactive </span></h1>
+                    {% endif %}
+                <button class="text-xs text-blue-700 border-3 py-2 px-3 rounded w-25 mt-2 hover:bg-blue-800 hover:text-white text-bold" onclick="Verify('rent', '{{ r.id }}')">Verify</button>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>

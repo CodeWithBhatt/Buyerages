@@ -14,6 +14,10 @@
 
         }
     </style>
+
+   
+
+    
 </head>
 
 <body>
@@ -21,24 +25,6 @@
     <h1 class="text-grey-900 font-semibold text-xl mt-5">Property to Buy</h1>
     {% for p in (data.BuyProperty) %}
     <section class="text-gray-600 body-font">
-        <script>
-            function Verify() {
-                const id = "{{ p.number }}";
-                fetch(`/admin/property?number=${id}`, {
-                    method: "PUT",
-                    headers: {
-                        "accept": "application/json"
-                    }
-                })
-                    .then(response => {
-                        response.json()
-                        window.location.href = `/admin/property`;
-                    })
-                    .catch(error => {
-                        alert("Cannot Update Due to Some Internal Server Error");
-                    });
-            };
-        </script>
         <div class="flex justify-center items-center main-container  bg-indigo-400">
             <div class="w-3/4 p-5 rounded bg-white">
                 <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg"
@@ -55,7 +41,7 @@
                     <h1 class="text-xs text-red-600">Property Status:<span class="text font-bold"> Inactive </span></h1>
                     {% endif %}
                 
-                <button class="text-xs text-blue-700 border-3 py-2 px-3 rounded w-25 mt-2 hover:bg-blue-800 hover:text-white text-bold" onclick="Verify()">Verify</button>
+                <button class="text-xs text-blue-700 border-3 py-2 px-3 rounded w-25 mt-2 hover:bg-blue-800 hover:text-white text-bold" onclick="Verify('{{ p.number }}')">Verify</button>
             </div>
         </div>
     </section>
@@ -66,24 +52,7 @@
     <h1 class="text-grey-900 font-semibold text-xl mt-5">Property to Rent</h1>
     {% for p in (data.RentProperty) %}
     <section class="text-gray-600 body-font">
-        <script>
-            function Verify() {
-                const id = "{{ p.number }}";
-                fetch(`/admin/property?number=${id}`, {
-                    method: "PUT",
-                    headers: {
-                        "accept": "application/json"
-                    }
-                })
-                    .then(response => {
-                        response.json()
-                        window.location.href = `/admin/property`;
-                    })
-                    .catch(error => {
-                        alert("Cannot Update Due to Some Internal Server Error");
-                    });
-            };
-        </script>
+        
         <div class="flex justify-center items-center main-container  bg-indigo-400">
             <div class="w-3/4 p-5 rounded bg-white">
                 <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg"
@@ -97,9 +66,9 @@
                     {% if p.status == true %}
                     <h1 class="text-xs text-green-600">Property Status:<span class="text font-bold"> Active </span></h1>
                     {% else %}
-                    <h1 class="text-xs text-red-600">Property Status:<span class="text font-bold"> Active </span></h1>
+                    <h1 class="text-xs text-red-600">Property Status:<span class="text font-bold"> Inactive </span></h1>
                     {% endif %}
-                <button class="text-xs text-blue-700 border-3 py-2 px-3 rounded w-25 mt-2 hover:bg-blue-800 hover:text-white text-bold" onclick="Verify()">Verify</button>
+                <button class="text-xs text-blue-700 border-3 py-2 px-3 rounded w-25 mt-2 hover:bg-blue-800 hover:text-white text-bold" onclick="Verify('{{ p.number }}')">Verify</button>
             </div>
         </div>
     </section>

@@ -64,6 +64,7 @@ class AddProperty(BaseModel):
 class PropertyToBuy(BaseModel):
     name : str
     number : str
+    owner : str
     description : str
     location : str
     pincode : str
@@ -74,7 +75,6 @@ class PropertyToBuy(BaseModel):
 class BuyPropertyForm(BaseModel):
     number : str
     owner : str
-    customer : str
     price : int
     taxes : float
     total_price : float
@@ -90,6 +90,7 @@ class SubmitBuyProperty(BuyPropertyForm):
 class PropertyToRent(BaseModel):
     name : str
     number : str
+    owner : str
     description : str
     location : str
     pincode : str
@@ -100,14 +101,13 @@ class PropertyToRent(BaseModel):
 class RentPropertyForm(BaseModel):
     number : str
     owner : str
-    customer : str
     rent : int
     downpayment: float
     class Config():
         orm_mode = True
 
 class SubmitRentProperty(RentPropertyForm):
-    tenure = int
+    tenure:  int
     class Config():
         orm_mode = True
 
@@ -136,7 +136,7 @@ class RentProperty(BaseModel):
 
 class BuyPropertyRecord(BaseModel):
     id : int
-    property : int
+    property : str
     owner : str
     customer : str
     price : int
@@ -150,7 +150,7 @@ class BuyPropertyRecord(BaseModel):
 
 class RentPropertyRecord(BaseModel):
     id : int
-    property : int
+    property : str
     owner : str
     customer : str
     rent : int

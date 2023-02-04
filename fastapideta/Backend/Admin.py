@@ -21,9 +21,9 @@ def Verify_Property(num:str, db:Session):
 def All_Record(db : Session):
     buy_records = db.query(model.BuyRecord).all()
     rent_records = db.query(model.RentRecord).all()
-    buy = [Schema.BuyProperty(id=b.record_id, property=b.property, owner=b.owner, customer=b.customer, price=b.price, tax=b.tax, total=b.total, token=b.token, purchase=str(b.purchasedate), verify=b.verification) for b in buy_records]
-    rent = [Schema.RentProperty(id=r.record_id, property=r.property, owner=r.owner, customer=r.customer, rent=r.rent, downpayment=r.downpayment, tenure=r.tenure, booking=str(r.bookingdate), verify=r.verification) for r in rent_records]
-    return [buy, rent]
+    buy = [Schema.BuyPropertyRecord(id=b.record_id, property=b.property, owner=b.owner, customer=b.customer, price=b.price, tax=b.tax, total=b.total, token=b.token, purchase=str(b.purchasedate), verify=b.verification) for b in buy_records]
+    rent = [Schema.RentPropertyRecord(id=r.record_id, property=r.property, owner=r.owner, customer=r.customer, rent=r.rent, downpayment=r.downpayment, tenure=r.tenure, booking=str(r.bookingdate), verify=r.verification) for r in rent_records]
+    return {"BuyRecord":buy, "RentRecord":rent}
 
 def Verify_Record(type:str, id: int, db:Session):
     if type=='buy':
@@ -32,7 +32,7 @@ def Verify_Record(type:str, id: int, db:Session):
         db.commit()
         query1 = db.query(model.BuyRecord).filter(model.BuyRecord.record_id == id).first()
         query2 = db.query(model.Property).filter(model.Property.number == query1.property)
-        query2.update({model.Property.owner : query.customer, model.Property.status : False})
+        query2.update({model.Property.owner : query.first().customer, model.Property.status : False})
         db.commit()
         return {"status": "success", "data":"buy record updated"}
     if type=='rent':

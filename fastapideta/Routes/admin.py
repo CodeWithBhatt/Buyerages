@@ -38,9 +38,8 @@ def verify_property(number:str, current_user:Schema.UserData = Depends(Auth.get_
 def All_Record(request:Request, current_user:Schema.UserData = Depends(Auth.get_current_user), db : Session = Depends(db)):
     if current_user.user == 'admin':
         record = Admin.All_Record(db)
-        result = {"BuyRecord":record[0], "RentRecord":record[1]}
-        # return {"data":result} # remove response_class from decorator
-        return templates.TemplateResponse("record.html", {"request":request, "data":result})
+        # return {"data":record} # remove response_class from decorator
+        return templates.TemplateResponse("record.html", {"request":request, "data":record})
     else:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Only Admin can access this")
 

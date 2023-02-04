@@ -17,12 +17,6 @@ def property(request:Request, current_user:Schema.UserData=Depends(Auth.get_curr
     # return properties # remove response_class from decorator
     return templates.TemplateResponse("BuyProperty.html", {"request":request, "data":properties})
 
-@router.get("/buyproperty", response_class=HTMLResponse, response_model=Schema.BuyPropertyForm, status_code=status.HTTP_200_OK)
-def buy_property(request:Request, property_number:str, current_user:Schema.UserData=Depends(Auth.get_current_user), db:Session=Depends(db)):
-    result = Buy.Extract_PropertyData(property_number, current_user.username, db)
-    # return result # remove response_class from decorator
-    return templates.TemplateResponse("BuyPropertyForm.html", {"request":request, "data":result})
-
 @router.post("/buyproperty", status_code=status.HTTP_201_CREATED)
 def submit_purchase(request:Schema.SubmitBuyProperty, current_user:Schema.UserData=Depends(Auth.get_current_user), db:Session=Depends(db)):
     result = Buy.Submit_Purchase(request, current_user.username, db)

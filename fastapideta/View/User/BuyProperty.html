@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROPERTIES</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        .main-container {
+            height: 90vh;
+
+        }
+    </style>
+
+    <script>
+        function Buy(num, owe, prc) {
+            function token_func(price, taxes, total_price) {
+                alert(`Price of Property: ${price}\nTax on Property Transaction (18% GST): ${taxes}\nTotal Payable amount: ${total_price}`);
+                const opinion = confirm("Do you want to purchase? Please do confirmation");
+                if (opinion){
+                    return parseInt(prompt("Enter token Amount for registration: "));
+                } else {
+                    return null;
+                }
+            }
+
+            const number = num;
+            const owner = owe;
+            const price = parseInt(prc);
+            const taxes = 0.18*price;
+            const total_price = price+taxes;
+            const token = token_func(price, taxes, total_price);
+
+            if (token < (0.10*total_price) || token === null){
+                alert(`Since token was less then ${0.10*total_price}\nPurchase is aborted`);
+                return;
+            }
+
+            data = {
+                number:number,
+                owner:owner,
+                price:price,
+                taxes:taxes,
+                total_price:total_price,
+                token:token
+            };
+            fetch('/buy/buyproperty', {
+                method: "POST",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    response.json()
+                    alert("Your token has been received\nPlease pay the full amount ASAP!")
+                    window.location.href = `/buy`;
+                })
+                .catch(error => {
+                    alert("Cannot Register Purchase Due to Some Internal Server Error");
+                });
+        };
+    </script>
+</head>
+
+<body>
+    {% if data|length > 0 %}
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">ALL PROPERTY AVAILABLE TO BUY</h1>
+    {% for p in data %}
+    <section class="text-gray-600 body-font">
+
+        
+        <br>
+        <div class="flex justify-center items-center main-container  bg-indigo-400">
+            <div class="w-3/4 p-5 rounded bg-white">
+                <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg" class="rounded-full w-32 justify-center items-center">
+                <h1 class="text-grey-300 text-sm p-1">Property Name: <span class="text font-bold">{{ p.name }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Number: <span class="text font-bold">{{ p.number }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Description: <span class="text font-bold">{{ p.description }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Location: <span class="text font-bold">{{ p.location }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Pincode: <span class="text font-bold">{{ p.pincode }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Price: <span class="text font-bold">{{ p.price }}</span></h1>
+                <button
+                    class="text-xs text-green-500 border-2 py-1 px-2 rounded w-25 mt-2 hover:bg-green-500 hover:text-white text-bold"
+                    onclick="Buy('{{ p.number }}', '{{ p.owner }}', '{{ p.price }}')">REGISTER PURCHASE</button>
+            </div>
+            <br>
+        </div>
+    </section>
+    {% endfor %}
+    {% else %}
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">NO PROPERTY AVAILABLE TO BUY AT CURRENT TIME</h1>
+    <br>
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">PLEASE VISIT US LATER</h1>
+    <br>
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">SORRY FOR INCONVINENCE</h1>
+    {% endif %}
+</body>
+
+</html>

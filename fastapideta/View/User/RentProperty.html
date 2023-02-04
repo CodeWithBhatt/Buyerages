@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROPERTIES</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <style>
+        .main-container {
+            height: 90vh;
+
+        }
+    </style>
+    <script>
+        function Rent(num, owe, rnt) {
+            function tenure_func(rent, downpayment) {
+                alert(`Price of Property: ${rent}\nDownpayment (3 Months Rent): ${downpayment}`);
+                const opinion = confirm("Do you want to rent the property? Please do confirmation");
+                if (opinion){
+                    return parseInt(prompt("Enter tenure for which you want to rent: "));
+                } else {
+                    return null;
+                }
+            }
+
+            const number = num;
+            const owner = owe;
+            const rent = parseInt(rnt);
+            const downpayment = rent*3.0;
+            const tenure = tenure_func(rent, downpayment);
+
+            if (tenure === 0 || tenure === null){
+                alert(`Since tenure period was 0\nRegistration is aborted`);
+                return;
+            }
+
+            data = {
+                number:number,
+                owner:owner,
+                rent:rent,
+                downpayment:downpayment,
+                tenure:tenure
+            };
+            fetch('/rent/rentproperty', {
+                method: "POST",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    response.json()
+                    window.location.href = `/rent`;
+                    alert("Your request has been received\nYou can move in ASAP!")
+                })
+                .catch(error => {
+                    alert("Cannot Register Due to Some Internal Server Error");
+                });
+        };
+    </script>
+</head>
+
+<body>
+    {% if data|length > 0 %}
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">ALL PROPERTY AVAILABLE TO RENT</h1>
+    {% for p in data %}
+    <section class="text-gray-600 body-font">
+        <br>
+        <div class="flex justify-center items-center main-container  bg-indigo-400">
+            <div class="w-3/4 p-5 rounded bg-white">
+                <img src="https://thumbs2.imgbox.com/fe/5f/8nxsYu45_t.jpeg" class="rounded-full w-32 justify-center items-center">
+                <h1 class="text-grey-300 text-sm p-1">Property Name: <span class="text font-bold">{{ p.name }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Number: <span class="text font-bold">{{ p.number }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Description: <span class="text font-bold">{{ p.description }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Location: <span class="text font-bold">{{ p.location }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Pincode: <span class="text font-bold">{{ p.pincode }}</span></h1>
+                <h1 class="text-grey-300 text-sm p-1">Property Rent Per Month: <span class="text font-bold">{{ p.rent }}</span></h1>
+                <button
+                    class="text-xs text-green-500 border-2 py-1 px-2 rounded w-25 mt-2 hover:bg-green-500 hover:text-white text-bold"
+                    onclick="Rent('{{ p.number }}', '{{ p.owner }}', '{{ p.price }}')">REGISTER RENTING</button>
+            </div>
+            <br>
+        </div>
+    </section>
+    {% endfor %}
+    {% else %}
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">NO PROPERTY AVAILABLE TO RENT AT CURRENT TIME</h1>
+    <br>
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">PLEASE VISIT US LATER</h1>
+    <br>
+    <h1 class="text-grey-900 font-semibold text-xl mt-5">SORRY FOR INCONVINENCE</h1>
+    {% endif %}
+</body>
+
+</html>
